@@ -1,5 +1,7 @@
 <?php
 
+namespace application\core;
+
 class Route
 {
     protected $routes = [];
@@ -28,6 +30,19 @@ class Route
 
         $controllerFile     = $controllerName . '.php';
         $filepathController = 'application/controllers/' . $controllerFile;
+
+        $path = 'application\controllers\\'.ucfirst($controllerName);
+        debug(($path));
+        debug(class_exists('application\controllers\Task'));
+        if (class_exists($path)) {
+            $action = $this->params['action'].'Action';
+            if (method_exists($path, $action)) {
+                $controller = new $path($this->params);
+                $controller->$action();
+            } else {
+                Route::errors(404);
+            }
+        }
 
         if (file_exists($filepathController)) {
             include "application/controllers/$controllerFile";

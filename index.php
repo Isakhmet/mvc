@@ -1,5 +1,14 @@
 <?php
-ini_set('display_errors', 1);
-require_once "application/dotenv.php";
-(new Dotenv())->load(__DIR__);
-require_once "application/bootstrap.php";
+
+require 'application/library/Dev.php';
+
+use application\core\Route;
+
+spl_autoload_register(function($class) {
+    $path = str_replace('\\', '/', $class.'.php');
+    if (file_exists($path)) {
+        require $path;
+    }
+});
+
+(new Route())->start();

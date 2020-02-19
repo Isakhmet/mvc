@@ -1,12 +1,10 @@
 <?php
 
-
 class Dotenv
 {
     public function load($path, $file = '.env')
     {
-
-        $filename = $path . '/' . $file;
+        $filename = dirname($path, 2) . '/' . $file;
 
         try {
             $lines = $this->fileToArray($filename);
