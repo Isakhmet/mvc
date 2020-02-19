@@ -1,0 +1,20 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="avatars" type="Image" />
+      <mapping pattern="LeadEffectReportsTransformer" type="PHP" />
+      <mapping pattern="landing_api" type="PHP" />
+      <mapping pattern="tengedaScore" type="PHP" />
+      <mapping pattern="id_rsa" type="PLAIN_TEXT" />
+      <mapping pattern="cluster" type="PLAIN_TEXT" />
+      <mapping pattern="example" type="PLAIN_TEXT" />
+      <mapping pattern="alfa" type="PLAIN_TEXT" />
+      <mapping pattern=".gitkeep" type="PLAIN_TEXT" />
+      <mapping pattern="10," type="PLAIN_TEXT" />
+      <mapping pattern="hosts" type="PLAIN_TEXT" />
+      <mapping ext="pub" type="PLAIN_TEXT" />
+      <mapping ext="save" type="PLAIN_TEXT" />
+      <mapping ext="1" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>
