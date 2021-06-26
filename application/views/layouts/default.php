@@ -3,5 +3,7 @@
 <head>
     <title><?php echo $title ?></title>
 </head>
-<body></body>
+<body>
+    <?php echo $content; ?>
+</body>
 </html>

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  orders-postgres:
+    image:   postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER:     'mvc-task'
+      POSTGRES_PASSWORD: 'mvc-task'
+      POSTGRES_DB:       'mvc-task'
+      SCHEMA:            'public'
+    ports:
+      - 54815:5432
+    volumes:
+      - ${PWD}/configurations/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+      - ${PWD}/postgres-data:/var/lib/postgresql/data

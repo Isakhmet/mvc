@@ -11,4 +11,8 @@ spl_autoload_register(function($class) {
     }
 });
 
+set_error_handler(function ($severity, $message, $file, $line) {
+    throw new \ErrorException($message, $severity, $severity, $file, $line);
+});
+
 (new Route())->start();

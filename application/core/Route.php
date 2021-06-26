@@ -8,55 +8,43 @@ class Route
 
     public function __construct()
     {
-        $config       = require 'application/config/routes.php';
-        $this->routes = $config;
+        $this->routes = require 'application/config/routes.php';
     }
 
     public function start()
     {
-        $controllerName = '';
-        $actionName     = '';
+        try {
+            $controllerName = '';
+            $actionName     = '';
 
-        $key = $this->match();
+            $key = $this->match();
 
-        if (isset($this->routes[$key])) {
-            $controllerName = $this->routes[$key]['controller'];
-            $actionName     = $this->routes[$key]['action'];
-        }
+            if (isset($this->routes[$key])) {
+                $controllerName = $this->routes[$key]['controller'];
+                $actionName     = $this->routes[$key]['action'];
+            }
 
-        if (!empty($controllerName)) {
-            $actionName = strtolower($actionName);
-        }
+            if (!empty($controllerName)) {
+                $actionName = strtolower($actionName);
+            }
 
-        $controllerFile     = $controllerName . '.php';
-        $filepathController = 'application/controllers/' . $controllerFile;
+            $controllerFile     = $controllerName . '.php';
+            $filepathController = 'application/controllers/' . $controllerFile;
+            $path               = 'application\controllers\\' . ucfirst($controllerName);
 
-        $path = 'application\controllers\\'.ucfirst($controllerName);
-        debug(($path));
-        debug(class_exists('application\controllers\Task'));
-        if (class_exists($path)) {
-            $action = $this->params['action'].'Action';
-            if (method_exists($path, $action)) {
-                $controller = new $path($this->params);
-                $controller->$action();
-            } else {
+            if (class_exists($path)) {
+                if (method_exists($path, $actionName)) {
+                    $controller = new $path($this->routes[$key]);
+                    $controller->$actionName();
+                } else {
+                    Route::errors(404);
+                }
+            }else{
                 Route::errors(404);
             }
-        }
-
-        if (file_exists($filepathController)) {
-            include "application/controllers/$controllerFile";
-        } else {
-            Route::errors(404);
-        }
-
-        $controller = new $controllerName($this->routes[$key]);
-
-        if (method_exists($controller, $actionName)) {
-
-            $controller->$actionName();
-        } else {
-            Route::errors(404);
+        }catch (\Exception $exception)
+        {
+            Route::errors(500, $exception->getMessage());
         }
     }
 
@@ -75,15 +63,15 @@ class Route
             $routes[0] = '/';
         }
 
-        $routes = implode($routes, '/');
+        $routes = implode('/', $routes);
 
         return $routes;
     }
 
-    public static function errors($code)
+    public static function errors($code, $message = '')
     {
         http_response_code($code);
-        require 'application/views/errors/'. $code . '.php';
+        include 'application/views/errors/' . $code . '.php';
         exit;
     }
 }

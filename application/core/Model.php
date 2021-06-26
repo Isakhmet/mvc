@@ -2,10 +2,14 @@
 
 namespace application\core;
 
+use application\library\DataBase;
 
-class Model
+abstract class Model
 {
-    public function getData()
+    protected $db;
+
+    public function __construct()
     {
+        $this->db = new Database();
     }
 }

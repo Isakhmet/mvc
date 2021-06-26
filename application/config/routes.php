@@ -9,4 +9,8 @@ return [
         'controller' => 'Task',
         'action'     => 'create'
     ],
+    'task/read' => [
+        'controller' => 'Task',
+        'action'     => 'read'
+    ],
 ];

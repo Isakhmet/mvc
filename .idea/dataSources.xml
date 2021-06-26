@@ -13,5 +13,12 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/tutorial</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="mvc-task@localhost" uuid="460abcc6-a4da-475c-bd13-f0120773eff3">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:54815/mvc-task</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

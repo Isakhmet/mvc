@@ -8,14 +8,21 @@ abstract class Controller
 {
     protected $route;
     protected $view;
+    protected $model;
 
-    function __construct($route)
+    public function __construct($route)
     {
         $this->route = $route;
         $this->view  = new View($route);
+        $this->model = $this->loadModel($route['controller']);
     }
 
-    function action()
+    private function loadModel($name)
     {
+        $path = 'application\models\\'.ucfirst($name);
+
+        if(class_exists($path)) {
+            return new $path();
+        }
     }
 }
