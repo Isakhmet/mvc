@@ -11,13 +11,15 @@ class View
     public function __construct($route)
     {
         $this->route = $route;
-        $this->path  = strtolower($route['controller']) . '/' . $route['action'];
+        $this->path  = strtolower($route['controller']) . '/' . strtolower($route['action']);
     }
 
     public function render($title, $params = [])
     {
         try {
+            $is_admin = $_SESSION['is_admin'] ?? false;
             extract($params);
+
             if (file_exists('application/views/' . $this->path . '.php')) {
                 ob_start();
                 require 'application/views/' . $this->path . '.php';
@@ -26,8 +28,12 @@ class View
             } else {
                 Route::errors(404);
             }
-        }catch (\Exception $exception) {
-            Route::errors(500, $exception->getMessage());
+        } catch (\Exception $exception) {
+            Route::errors(500, [
+                'message' => $exception->getMessage(),
+                'line'    => $exception->getLine(),
+                'file'    => $exception->getFile(),
+            ]);
         }
 
     }

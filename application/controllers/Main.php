@@ -8,6 +8,6 @@ class Main extends Controller
 {
     function index()
     {
-        $this->view->render('Main');
+        $this->view->redirect('task/read');
     }
 }

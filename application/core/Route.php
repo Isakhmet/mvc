@@ -39,18 +39,29 @@ class Route
                 } else {
                     Route::errors(404);
                 }
-            }else{
+            } else {
                 Route::errors(404);
             }
-        }catch (\Exception $exception)
-        {
-            Route::errors(500, $exception->getMessage());
+        } catch (\Exception $exception) {
+            Route::errors(
+                500, [
+                'message' => $exception->getMessage(),
+                'line'    => $exception->getLine(),
+                'file'    => $exception->getFile(),
+            ]
+            );
         }
     }
 
     private function match()
     {
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $url = $_SERVER['REQUEST_URI'];
+
+        if (stripos($_SERVER['REQUEST_URI'], '?')) {
+            $url = substr($_SERVER['REQUEST_URI'], 0, stripos($_SERVER['REQUEST_URI'], '?'));
+        }
+
+        $routes = explode('/', $url);
         $routes = array_filter(
             $routes, function ($value) {
             if (strlen($value) > 0) {
@@ -68,8 +79,9 @@ class Route
         return $routes;
     }
 
-    public static function errors($code, $message = '')
+    public static function errors($code, $exception = [])
     {
+        extract($exception);
         http_response_code($code);
         include 'application/views/errors/' . $code . '.php';
         exit;
