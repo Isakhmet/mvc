@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="add__task">
-            <button class="add__button">Add new task</button>
+            <button class="add__button">+</button>
         </div>
     </main>
     <div class="task__fields">
@@ -70,39 +70,3 @@
         <input type="submit" value="Update" id="update__fields">
     </div>
 </div>
-
-<style>
-    .task__edit{
-        display: none;
-    }
-    .task__fields{
-        display: none;
-        grid-gap: 1em;
-        border: 1px solid gray;
-        position: relative;
-    }
-
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        width: auto;
-        position: absolute;
-    }
-
-    .task__main {
-        display: flex;
-        width: 700px;
-    }
-
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-</style>

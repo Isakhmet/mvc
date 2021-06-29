@@ -1,0 +1,81 @@
+.task__edit {
+    display: none;
+}
+
+.task__fields {
+    display:  none;
+    grid-gap: 1em;
+    border:   1px solid gray;
+    position: relative;
+}
+
+.task__main {
+    display: flex;
+    width:   800px;
+}
+
+table {
+    font-family:     arial, sans-serif;
+    border-collapse: collapse;
+    width:           100%;
+}
+
+td, th {
+    border:     1px solid #9c9a9a;
+    text-align: left;
+    padding:    8px;
+}
+
+.header {
+    display:         flex;
+    justify-content: flex-end;
+    width:           100%;
+    height:          60px;
+    border-bottom:   1px solid #9c9a9a;
+}
+
+.navbar {
+    display:          flex;
+    align-items:      center;
+    background-color: #ffffff;
+}
+
+.sign__button {
+    height: 40px;
+    width:  80px;
+}
+
+.container {
+    display:         flex;
+    justify-content: center;
+    padding-top:     15px;
+    width:           100%;
+}
+
+.task__table {
+    width:          100%;
+    display:        flex;
+    flex-direction: column;
+    padding:        5px;
+}
+
+.paginate {
+    align-self:  center;
+    padding-top: 5px;
+}
+
+.paginate a {
+    text-decoration: none;
+}
+
+.add__button {
+    height:    30px;
+    width:     45px;
+    font-size: 25px;
+    font-family: arial, sans-serif;
+    border:    1px solid #9c9a9a;
+}
+
+.add__task{
+    justify-self: flex-end;
+}
