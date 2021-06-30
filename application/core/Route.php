@@ -16,8 +16,7 @@ class Route
         try {
             $controllerName = '';
             $actionName     = '';
-
-            $key = $this->match();
+            $key            = $this->match();
 
             if (isset($this->routes[$key])) {
                 $controllerName = $this->routes[$key]['controller'];
@@ -28,9 +27,7 @@ class Route
                 $actionName = strtolower($actionName);
             }
 
-            $controllerFile     = $controllerName . '.php';
-            $filepathController = 'application/controllers/' . $controllerFile;
-            $path               = 'application\controllers\\' . ucfirst($controllerName);
+            $path = 'application\controllers\\' . ucfirst($controllerName);
 
             if (class_exists($path)) {
                 if (method_exists($path, $actionName)) {
@@ -45,10 +42,10 @@ class Route
         } catch (\Exception $exception) {
             Route::errors(
                 500, [
-                'message' => $exception->getMessage(),
-                'line'    => $exception->getLine(),
-                'file'    => $exception->getFile(),
-            ]
+                       'message' => $exception->getMessage(),
+                       'line'    => $exception->getLine(),
+                       'file'    => $exception->getFile(),
+                   ]
             );
         }
     }

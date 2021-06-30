@@ -25,7 +25,6 @@
                         <?php
                             echo $task['is_changed'] ? 'отредактировано администратором' : '';
                         ?>
-
                     </td>
                     <?php if($is_admin):?>
                         <td><button class="edit__button" onclick='editTask(<?= $task['id']?>)'>edit</button></td>
@@ -42,8 +41,6 @@
         <div class="add__task">
             <button class="add__button">+</button>
         </div>
-
-
         <div class="task_modal-create" aria-hidden="true">
             <div class="wrap_modal">
                 <div class="task_title">
