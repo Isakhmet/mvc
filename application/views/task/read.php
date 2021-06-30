@@ -38,9 +38,11 @@
                 <?php endfor; ?>
             </div>
         </div>
-        <div class="add__task">
-            <button class="add__button">+</button>
-        </div>
+        <?php if(!$is_admin):?>
+            <div class="add__task">
+                <button class="add__button">+</button>
+            </div>
+        <?php endif;?>
         <div class="task_modal-create" aria-hidden="true">
             <div class="wrap_modal">
                 <div class="task_title">
