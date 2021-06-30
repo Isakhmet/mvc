@@ -4,14 +4,14 @@
         <div class="task__table">
             <table>
                 <tr>
-                    <th><p>Title</p></th>
-                    <th><a href="?order=name&&sort=<?=$sort?>">User</a></th>
-                    <th><a href="?order=email&&sort=<?=$sort?>">Email</a></th>
-                    <th><p>Description</p></th>
-                    <th><a href="?order=status&&sort=<?=$sort?>">Status</a></th>
-                    <th><p>Changed</p></th>
+                    <th><p>Задачи</p></th>
+                    <th><a href="?page=<?= $page?>&&order=name&&sort=<?=$sort?>">Пользователь</a></th>
+                    <th><a href="?page=<?= $page?>&&order=email&&sort=<?=$sort?>">Почта</a></th>
+                    <th><p>Описание задачи</p></th>
+                    <th><a href="?page=<?= $page?>&&order=status&&sort=<?=$sort?>">Статус</a></th>
+                    <th><p>Изменен админом</p></th>
                     <?php if($is_admin):?>
-                    <th><p>Admin</p></th>
+                    <th><p>Редактирование</p></th>
                     <?php endif;?>
                 </tr>
                 <?php foreach ($tasks as $key => $task): ?>
@@ -23,7 +23,7 @@
                     <td><?php echo $task['status']?></td>
                     <td>
                         <?php
-                            echo $task['is_changed'] ? 'Отредактирован' : '';
+                            echo $task['is_changed'] ? 'отредактировано администратором' : '';
                         ?>
 
                     </td>
@@ -42,31 +42,60 @@
         <div class="add__task">
             <button class="add__button">+</button>
         </div>
+
+
+        <div class="task_modal-create" aria-hidden="true">
+            <div class="wrap_modal">
+                <div class="task_title">
+                    <h2>Создать новую задачу</h2>
+                    <a href="#" class="task_close closemodal" aria-hidden="true">×</a>
+                </div>
+                <div class="task_fields">
+                    <input type="text" name="user" placeholder="Пользователь">
+                    <input type="text" name="email" placeholder="Почта">
+                    <input type="text" name="title" placeholder="Задача">
+                    <input type="text" name="description" placeholder="Описание задачи">
+                </div>
+                <div class="task_create">
+                    <a href="" id="add__task" class="create_button">Создать</a>
+                </div>
+            </div>
+        </div>
+        <div class="task_modal-update" aria-hidden="true">
+            <div class="wrap_modal">
+                <div class="task_title">
+                    <h2>Редактировать задачу</h2>
+                    <a href="#" class="task_close closemodal" aria-hidden="true">×</a>
+                </div>
+                <div class="task_fields">
+                    <input type="text" name="edit_user" placeholder="Пользователь">
+                    <input type="text" name="edit_email" placeholder="Почта">
+                    <input type="text" name="edit_title" placeholder="Задача">
+                    <input type="text" name="edit_description" placeholder="Описание задачи">
+                    <div class="status_done">
+                        <label for="status">Выполнено</label>
+                        <input type="checkbox" name="edit_status" id="status">
+                    </div>
+                </div>
+                <div class="task_create">
+                    <a href="" id="update__fields" class="update_button">Сохранить изменения</a>
+                </div>
+            </div>
+        </div>
+        <div class="signin_modal" aria-hidden="true">
+            <div class="wrap_modal">
+                <div class="task_title">
+                    <h2>Войдите в свой аккаунт</h2>
+                    <a href="#" class="task_close closemodal" aria-hidden="true">×</a>
+                </div>
+                <div class="task_fields">
+                    <input type="text" id="username" name="username" placeholder="Пользователь">
+                    <input type="password" id="password" name="password" placeholder="Пароль">
+                </div>
+                <div class="task_create">
+                    <a href="" id="login" class="update_button">Авторизоваться</a>
+                </div>
+            </div>
+        </div>
     </main>
-    <div class="task__fields">
-        <form action="create" method="post">
-            <label for="user">User name</label>
-            <input type="text" placeholder="User" name="user">
-            <label for="">Email</label>
-            <input type="text" name="email" placeholder="test@gmail.com">
-            <label for="">Title</label>
-            <input type="text" name="title" placeholder="Shopping">
-            <label for="">Description</label>
-            <input type="text" name="description" placeholder="Go to shopping">
-            <input type="button" value="Create" name="create" id="add__task">
-        </form>
-    </div>
-    <div class="task__edit">
-        <label for="user">User name</label>
-        <input type="text" name="edit_user">
-        <label for="">Email</label>
-        <input type="text" name="edit_email">
-        <label for="">Title</label>
-        <input type="text" name="edit_title">
-        <label for="">Description</label>
-        <input type="text" name="edit_description">
-        <label for="">Status</label>
-        <input type="text" name="edit_status">
-        <input type="submit" value="Update" id="update__fields">
-    </div>
 </div>

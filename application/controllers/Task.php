@@ -43,6 +43,7 @@ class Task extends Controller
         $params = [
             'tasks'     => $this->model->getTasks($data),
             'pageCount' => $pageCount,
+            'page'      => $page,
             'order'     => $order,
             'sort'      => strcmp($sort, 'ASC') === 0 ? 'DESC' : 'ASC',
         ];
@@ -53,10 +54,10 @@ class Task extends Controller
     public function create()
     {
         $params = [
-            'name'        => $_POST['user'],
-            'email'       => $_POST['email'],
-            'title'       => $_POST['title'],
-            'description' => $_POST['description'],
+            'name'        => strip_tags($_POST['user']),
+            'email'       => strip_tags($_POST['email']),
+            'title'       => strip_tags($_POST['title']),
+            'description' => strip_tags($_POST['description']),
         ];
 
         $params['userId'] = (new User())->existUser($params);
@@ -78,6 +79,11 @@ class Task extends Controller
 
     public function update()
     {
+        if(!$_SESSION['is_admin']) {
+            echo 'false';
+            return false;
+        }
+
         $params = [
             'id'          => $_POST['id'],
             'description' => $_POST['description'],
@@ -86,7 +92,7 @@ class Task extends Controller
 
         $isChanged = $this->model->isChanged($params);
 
-        if($isChanged) {
+        if ($isChanged) {
             $params['is_changed'] = true;
         }
 

@@ -1,7 +1,29 @@
 $(document).ready(function () {
-    $('.add__button').click(function (){
-        $('.task__fields').css('display', 'grid')
+
+    $('.add__button').click(function (e) {
+        e.preventDefault();
+        $('.task_modal-create').addClass('midsalod');
     });
+
+    $('.edit__button').click(function (e) {
+        e.preventDefault();
+        $('.task_modal-update').addClass('midsalod');
+    });
+
+    $('.sign-in').click(function () {
+        $('.signin_modal').addClass('midsalod');
+    })
+
+    $('.closemodal').click(function (e) {
+        e.preventDefault();
+        $('.task_modal-create').removeClass('midsalod');
+        $('.task_modal-update').removeClass('midsalod');
+        $('.signin_modal').removeClass('midsalod');
+    });
+
+    /*$('.add__button').click(function (){
+        $('.task__fields').css('display', 'grid')
+    });*/
 
     $('#add__task').click(function () {
         var name        = $("input[name='user']").val();
@@ -65,7 +87,12 @@ $(document).ready(function () {
     $('#update__fields').click(function () {
         var id          = $("input[name='edit_description']").attr('id');
         var description = $("input[name='edit_description']").val();
-        var status      = $("input[name='edit_status']").val();
+
+        if($('#status').is(':checked')) {
+            var status = 'выполнено';
+        } else {
+            var status = $("input[type='checkbox']").val();
+        }
 
         $.ajax({
             url:     '/task/update',
@@ -76,17 +103,15 @@ $(document).ready(function () {
                 status:      status
             },
             success: function (data) {
-                window.location = '/task/read';
+                console.log(data)
+                if(data === 'false') {
+                    alert('Пожалуйста авторизуйтесь');
+                }else {
+                    window.location = '/task/read';
+                }
             }
         });
     });
-
-    $('.edit__button').click(function () {
-        $('.task__edit').css('display', 'block');
-    });
-    $('.sign-in').click(function () {
-        window.location = '/sign/in';
-    })
 
     $('.sign-out').click(function () {
         $.ajax({
@@ -155,7 +180,6 @@ function editTask(id) {
             $("input[name='edit_description']").attr('id', id);
             $("input[name='edit_email']").val(data.email);
             $("input[name='edit_status']").val(data.status);
-
         }
     });
 }
